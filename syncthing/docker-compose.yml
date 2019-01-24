@@ -1,0 +1,25 @@
+# Reference: 
+# - https://github.com/linuxserver/docker-syncthing
+#
+# Instruction:
+# - Create .env file with following valuables
+#     BASE_DIR=<your base directory>
+#     PUID=<your user id>
+#     PGID=<your group id>
+
+version: "2.2"
+services:
+  syncthing:
+    image: linuxserver/syncthing
+    container_name: syncthing
+    volumes:
+    - "${BASE_DIR}/config:/config"
+    - "${BASE_DIR}/data:/mnt/data"
+    environment:
+    - "PUID=${PUID}"
+    - "PGID=${PGID}"
+    # - "UMASK=<022>"
+    ports:
+    - 8384:8384
+    - 22000:22000
+    - 21027:21027/udp
